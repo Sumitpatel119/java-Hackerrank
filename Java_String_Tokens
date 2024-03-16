@@ -1,0 +1,21 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        String s = scan.nextLine();
+        // Write your code here.
+        String[] token =s.split("[^A-Za-z]");
+        int num=0;
+        for(int i=0;i<token.length;i++)
+            if(token[i].length()>0)
+            num++;        
+        System.out.println(num);
+        for(int i=0;i<token.length;i++)
+            if(token[i].length()>0)
+            System.out.println(token[i]);
+        scan.close();
+    }
+}
+
