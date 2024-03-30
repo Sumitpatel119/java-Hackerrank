@@ -1,0 +1,94 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.*;
+
+/*
+ * Create the Student and Priorities classes here.
+ */
+
+class Priorities implements Comparator<Student>{
+    public int compare(Student s1,Student s2){
+        if(s1.getCGPA()!=s2.getCGPA()){
+            Double d1=Double.valueOf(s1.getCGPA());
+            Double d2=Double.valueOf(s2.getCGPA());
+            return d2.compareTo(d1);
+        }
+        else if(s1.getName()!=s2.getName()){
+            return s1.getName().compareTo(s2.getName());
+        }
+        else{
+            Integer i1=Integer.valueOf(s1.getID());
+            Integer i2=Integer.valueOf(s2.getID());
+            return i1.compareTo(i2);
+        }
+    }
+    List<Student> getStudents(List<String> events){
+        String str="SERVED";
+        int count=0;
+        List<Student> list=new ArrayList<>();
+         for(int i=0;i<events.size();i++){
+            String[] s=events.get(i).split(" ");
+            if(s[0].equals(str)){
+                if(list.size()==0)
+                    continue;
+                Comparator comp=new Priorities();
+                Collections.sort(list,comp);
+                list.remove(0);
+            }
+            if(s[0].equals(str)!=true){
+            Double d=Double.valueOf(s[2]);
+            list.add(new Student(Integer.parseInt(s[3]), s[1], d));
+            }
+        }
+        for(int i=0;i<count;i++){
+            list.remove(0);
+        }
+       
+        return list;
+    }
+}
+ class Student extends Priorities{
+    int id;
+    String name;
+    double cgpa;
+    Student(int id,String name,double cgpa){
+        this.id=id;
+        this.name=name;
+        this.cgpa=cgpa;
+    }
+    int getID(){
+        return this.id;
+    }
+    String getName(){
+        return this.name;
+    }
+    double getCGPA(){
+        return this.cgpa;
+    }
+ }
+
+public class Solution {
+    private final static Scanner scan = new Scanner(System.in);
+    private final static Priorities priorities = new Priorities();
+    
+    public static void main(String[] args) {
+        int totalEvents = Integer.parseInt(scan.nextLine());    
+        List<String> events = new ArrayList<>();
+        
+        while (totalEvents-- != 0) {
+            String event = scan.nextLine();
+            events.add(event);
+        }
+        
+        List<Student> students = priorities.getStudents(events);
+        
+        if (students.isEmpty()) {
+            System.out.println("EMPTY");
+        } else {
+            for (Student st: students) {
+                System.out.println(st.getName());
+            }
+        }
+    }
+}
