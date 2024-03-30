@@ -1,0 +1,70 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        int sz=sc.nextInt();
+        int testCase=sc.nextInt();
+        BitSet b1=new BitSet(sz);
+        BitSet b2=new BitSet(sz);
+        String and="AND";
+        String or="OR";
+        String xor="XOR";
+        String flip="FLIP";
+        String set="SET";
+        while(testCase>0){
+            String s=sc.next();
+            int n1=sc.nextInt();
+            int n2=sc.nextInt();
+            if(s.equals(and)){
+                if(n1==1){
+                    b1.and(b2);
+                    System.out.println(b1.cardinality()+" "+b2.cardinality());
+                }else{
+                    b2.and(b1);
+                    System.out.println(b1.cardinality()+" "+b2.cardinality());
+                }
+            }else if(s.equals(or)){
+                if(n1==1){
+                    b1.or(b2);
+                    System.out.println(b1.cardinality()+" "+b2.cardinality());
+                }else{
+                    b2.or(b1);
+                    System.out.println(b1.cardinality()+" "+b2.cardinality());
+                }
+            }else if(s.equals(xor)){
+                if(n1==1){
+                    b1.xor(b2);
+                    System.out.println(b1.cardinality()+" "+b2.cardinality());
+                }else{
+                    b2.xor(b1);
+                    System.out.println(b1.cardinality()+" "+b2.cardinality());
+                }
+            }else if(s.equals(flip)){
+                if(n1==1){
+                    b1.flip(n2);
+                    System.out.println(b1.cardinality()+" "+b2.cardinality());
+                }else{
+                    b2.flip(n2);
+                    System.out.println(b1.cardinality()+" "+b2.cardinality());
+                }
+            }else{
+                if(n1==1){
+                    b1.set(n2);
+                    System.out.println(b1.cardinality()+" "+b2.cardinality());
+                }else{
+                    b2.set(n2);
+                    System.out.println(b1.cardinality()+" "+b2.cardinality());
+                }
+            }
+            
+            testCase--;
+        }
+    }
+}
